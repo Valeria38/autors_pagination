@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "baseUrl": "./src/",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "paths": {
+      "store": ["store"],
+      "features": ["features/"],
+      "features/*": ["features/*"],
+      "common": ["features/common"],
+      "common/*": ["features/common/*"],
+      "Constants": ["Constants"],
+      "Constants/*": ["Constants/*"],
+      "images/*": ["images/*"],
+      "helpers": ["helpers"],
+      "helpers/*": ["helpers/*"],
+      "hooks": ["hooks"],
+    }
+  },
+  "exclude": ["node_modules", "build"]
+}

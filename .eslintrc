@@ -1,0 +1,20 @@
+{
+  "extends": ["airbnb", "eslint:recommended", "plugin:jest/recommended"],
+  "settings": {
+      "import/resolver": "webpack"
+  },
+  "rules": {
+      "react/react-in-jsx-scope": "warn",
+      "react/jsx-filename-extension": "warn",
+      "react/jsx-props-no-spreading": "warn",
+      "no-undef": "warn"
+  },
+  "globals": {
+      "window": true,
+      "document": true
+  },
+  "plugins": ["jest"],
+  "env": {
+      "jest/globals": true
+  }
+}
