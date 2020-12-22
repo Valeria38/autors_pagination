@@ -1,0 +1,23 @@
+@import 'theme/colors';
+
+.search-input-wrapper {
+  width: 100%;
+  height: 60px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  background: $lightGray;
+}
+
+.search-input {
+  width: 100%;
+  background: $lightGray;
+  color: $darkBlue;
+  border: none;
+  outline: none;
+
+  &:placeholder {
+    color: $gray;
+  }
+}

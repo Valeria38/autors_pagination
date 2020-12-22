@@ -12,6 +12,8 @@
       "common/*": ["features/common/*"],
       "Constants": ["Constants"],
       "Constants/*": ["Constants/*"],
+      "theme": ["theme"],
+      "theme/*": ["theme/*"],
       "images/*": ["images/*"],
       "helpers": ["helpers"],
       "helpers/*": ["helpers/*"],

@@ -18,7 +18,7 @@ module.exports = {
       store: path.resolve(__dirname, 'src/store'),
       hooks: path.resolve(__dirname, 'src/hooks/'),
       helpers: path.resolve(__dirname, 'src/helpers/'),
-      customPropTypes: path.resolve(__dirname, 'src/customPropTypes'),
+      theme: path.resolve(__dirname, 'src/theme/'),
     },
   },
   module: {
