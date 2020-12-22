@@ -18,6 +18,7 @@
       "helpers": ["helpers"],
       "helpers/*": ["helpers/*"],
       "hooks": ["hooks"],
+      "hooks/*": ["hooks/*"],
     }
   },
   "exclude": ["node_modules", "build"]

@@ -1,0 +1,35 @@
+@import 'theme/colors.scss';
+
+.pagination {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $white;
+  border: 1px solid $white;
+}
+
+.pagination--arrow {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  fill: $transparentWhite;
+  cursor: pointer;
+
+  &:hover {
+    fill: $white;
+  }
+
+  &:first-child {
+    transform: translateX(-40px);
+  }
+
+  &:last-child {
+    transform: translateX(40px);
+  }
+}
+
+.pagination--arrow.disabled {
+  display: none;
+}
