@@ -1,6 +1,10 @@
+import { medalSvgComponents } from 'Constants';
+
 import './styles.scss';
 
-const ListItem = ({ id, name, count_pub, pageviews, withMedal }) => {
+const ListItem = ({ id, name, count_pub, pageviews, topPlaceIndex }) => {
+  const Medal = medalSvgComponents[topPlaceIndex];
+  const withMedal = topPlaceIndex !== -1;
   const avatarLetter = name.slice(0, 1);
   return (
     <div className="list-item">
@@ -13,7 +17,7 @@ const ListItem = ({ id, name, count_pub, pageviews, withMedal }) => {
         <div className="list-item--count-pub">{count_pub} публ.</div>
       </div>
 
-      <div>{withMedal && 1}</div>
+      <div className="list-item--medal">{withMedal && <Medal />}</div>
 
       <div className="list-item--pageviews">{pageviews}</div>
     </div>

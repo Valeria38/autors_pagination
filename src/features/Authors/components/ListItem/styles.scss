@@ -44,6 +44,13 @@
   color: $white;
 }
 
+.list-item--medal {
+  align-self: start;
+  justify-self: center;
+  width: 15px;
+  height: 15px;
+}
+
 .list-item {
   &:nth-child(3) {
     .list-item--avatar {

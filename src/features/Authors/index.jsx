@@ -17,13 +17,37 @@ const Authors = () => {
     data
   );
 
+  const [topIds, setTopIds] = useState([]);
+
+  const getTopThree = () => {
+    const topThreeIds = [...data]
+      .sort((a, b) => b.pageviews - a.pageviews)
+      .slice(0, 3)
+      .map(({ id }) => id);
+
+    setTopIds(topThreeIds);
+  };
+
+  useEffect(() => {
+    getTopThree();
+  }, []);
+
+  const getTopPlace = (id) => {
+    const index = topIds.indexOf(id);
+    return index;
+  };
+
   return (
     <div className="authors">
       <div className="authors--list-wrapper">
         <SearchInput placeholder="Поиск авторов по имени" />
 
         {currentItems.map((author) => (
-          <ListItem key={author.id} {...author} />
+          <ListItem
+            key={author.id}
+            {...author}
+            topPlaceIndex={getTopPlace(author.id)}
+          />
         ))}
       </div>
       <Pagination
