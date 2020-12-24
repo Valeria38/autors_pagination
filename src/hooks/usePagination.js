@@ -5,12 +5,15 @@ const usePagination = (defaultOffset, defaultLimit, items) => {
   const [offset, setOffset] = useState(defaultOffset);
   const [currentItems, setCurrentItems] = useState([]);
 
+  console.log('use pagination', items);
+
   const handleChange = (offset, limit) => {
     setOffset(offset);
     setLimit(limit);
   };
 
   useEffect(() => {
+    console.log('effect items', items);
     setCurrentItems(items.slice(offset, offset + limit));
   }, [offset, limit, items]);
 
@@ -23,6 +26,7 @@ const usePagination = (defaultOffset, defaultLimit, items) => {
     offset,
     limit,
     currentItems,
+    setCurrentItems,
     reset,
     handleChange,
   };
