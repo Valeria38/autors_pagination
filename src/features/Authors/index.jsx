@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import SearchInput from 'features/Authors/components/SearchInput';
 import ListItem from 'features/Authors/components/ListItem';
@@ -17,12 +17,6 @@ const Authors = () => {
   const [topThree, setTopThree] = useState([]);
   const [value, setValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-
-  const { offset, limit, currentItems, handleChange } = usePagination(
-    DEFAULT_OFFSET,
-    DEFAULT_LIMIT,
-    data
-  );
 
   const {
     offset: searchOffset,
@@ -76,6 +70,8 @@ const Authors = () => {
     return isTopPlace;
   };
 
+  const page = useMemo(() => (searchOffset / 10) + 1, [searchOffset]);
+
   return (
     <div className="authors">
       <div className="authors--list-wrapper">
@@ -91,28 +87,23 @@ const Authors = () => {
           <div />
           <SortHeader>Page views</SortHeader>
         </div> */}
-
+        
         {searchCurrentItems.length
-          ? searchCurrentItems.map((author, index) => (
+          && searchCurrentItems.map((author, index) => (
               <ListItem
+                index={page === 1 ? (index + 1) : (searchOffset) + (index + 1)}
                 key={index}
                 {...author}
                 isTopPlace={getIsTopPlace(author.id)}
               />
-            ))
-          : currentItems.map((author, index) => (
-              <ListItem
-                key={index}
-                {...author}
-                isTopPlace={getIsTopPlace(author.id)}
-              />
-            ))}
+        ))}
+
       </div>
       <Pagination
-        offset={searchResults.length ? searchOffset : offset}
-        limit={searchResults.length ? searchLimit : limit}
-        total={searchResults.length ? searchResults.length : data.length}
-        onChange={searchResults.length ? searchHandleChange : handleChange}
+        offset={searchOffset}
+        limit={searchLimit}
+        total={searchResults.length}
+        onChange={searchHandleChange}
       />
     </div>
   );

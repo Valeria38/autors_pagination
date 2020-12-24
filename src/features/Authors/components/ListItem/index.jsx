@@ -8,7 +8,7 @@ const ListItem = ({ id, name, count_pub, pageviews, isTopPlace, index }) => {
 
   return (
     <div className="list-item">
-      <div className="list-item--id">{id}</div>
+      <div className="list-item--id">{index}</div>
 
       <div className="list-item--avatar">{avatarLetter}</div>
       <div className="list-item--left">
