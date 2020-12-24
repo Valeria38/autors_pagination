@@ -1,5 +1,5 @@
 # autors_pagination
-* [Demo](https://valeria38.github.io/authors_pagination/)
+* [Demo](https://valeria38.github.io/autors_pagination/)
 ----------------------------------------------------------------
 * To install all the dependencies run
 ## yarn
