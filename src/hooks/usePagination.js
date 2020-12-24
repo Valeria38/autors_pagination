@@ -14,10 +14,16 @@ const usePagination = (defaultOffset, defaultLimit, items) => {
     setCurrentItems(items.slice(offset, offset + limit));
   }, [offset, limit, items]);
 
+  const reset = () => {
+    setOffset(defaultOffset);
+    setLimit(defaultLimit);
+  };
+
   return {
     offset,
     limit,
     currentItems,
+    reset,
     handleChange,
   };
 };

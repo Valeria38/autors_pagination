@@ -1,21 +1,15 @@
-import { useState } from 'react';
+import SearchIcon from 'images/search.svg';
 
 import './styles.scss';
 
-const SearchInput = ({ onChange, name, placeholder }) => {
-  const [value, setValue] = useState('');
-
-  const handleChange = ({ target: { value } }) => {
-    setValue(value);
-    // onChange(value);
-  };
-
+const SearchInput = ({ value, onChange, name, placeholder }) => {
   return (
     <div className="search-input-wrapper">
+      <SearchIcon className="search-input--icon" />
       <input
         className="search-input"
         value={value}
-        onChange={handleChange}
+        onChange={onChange}
         name={name}
         placeholder={placeholder}
       />

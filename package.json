@@ -1,6 +1,7 @@
 {
   "name": "autors_pagination",
   "version": "1.0.0",
+  "homepage": "http://valeria38.github.io/authors_pagination",
   "main": "index.js",
   "repository": "https://github.com/Valeria38/autors_pagination.git",
   "author": "waleria.gora@gmail.com",
@@ -51,12 +52,7 @@
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-redux": "^7.2.2",
-    "redux": "^4.0.5",
-    "redux-actions": "^2.6.5",
-    "redux-devtools-extension": "^2.13.8",
-    "reselect": "^4.0.0"
+    "react-dom": "^17.0.1"
   },
   "jest": {
     "transform": {

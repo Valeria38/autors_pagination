@@ -1,0 +1,9 @@
+@import 'theme/colors.scss';
+
+.sort-header {
+  height: 40px;
+
+  &:last-child {
+    justify-self: end;
+  }
+}
