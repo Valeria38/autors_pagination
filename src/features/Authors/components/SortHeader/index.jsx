@@ -1,27 +1,15 @@
+import { SORTING_ORDERS } from 'Constants';
+
 import './styles.scss';
 
-const sortOrders = {
-  asc: 'asc',
-  desc: 'desc',
-};
-
 const SortHeader = ({ children, order, sort, field }) => {
-  // const [sortOrder, setSortOrder] = useState(order);
-
-  // const sort = () => {
-  //   const order = sortOrder === sortOrders.asc ? sortOrders.desc : sortOrders.asc;
-  //   setSortOrder(order);
-  // }
+  const nextOrder =
+    order === SORTING_ORDERS.asc ? SORTING_ORDERS.desc : SORTING_ORDERS.asc;
 
   return (
-    <div
-      className="sort-header"
-      onClick={() =>
-        sort(order === sortOrders.asc ? sortOrders.desc : sortOrders.asc, field)
-      }
-    >
+    <div className="sort-header" onClick={() => sort(nextOrder, field)}>
       {children}
-      {order === sortOrders.asc ? (
+      {order === SORTING_ORDERS.desc ? (
         <div className="arrow-up" />
       ) : (
         <div className="arrow-down" />

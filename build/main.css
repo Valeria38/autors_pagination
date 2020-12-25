@@ -114,9 +114,28 @@
   display: none; }
 
 .sort-header {
-  height: 40px; }
+  height: 40px;
+  display: flex;
+  align-items: center;
+  cursor: pointer; }
   .sort-header:last-child {
     justify-self: end; }
+
+.arrow-up {
+  width: 0;
+  height: 0;
+  margin: 0 5px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #3eabeb; }
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  margin: 0 5px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #3eabeb; }
 
 .authors {
   width: 100%;

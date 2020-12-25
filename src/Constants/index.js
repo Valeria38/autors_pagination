@@ -10,3 +10,8 @@ export const medalSvgComponents = [
 
 export const DEFAULT_OFFSET = 0;
 export const DEFAULT_LIMIT = 10;
+
+export const SORTING_ORDERS = {
+  asc: 'asc',
+  desc: 'desc',
+};

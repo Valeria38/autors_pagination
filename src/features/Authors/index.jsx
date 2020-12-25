@@ -7,16 +7,13 @@ import SortHeader from 'features/Authors/components/SortHeader';
 
 import usePagination from 'hooks/usePagination';
 
-import { DEFAULT_OFFSET, DEFAULT_LIMIT } from 'Constants';
+import { DEFAULT_OFFSET, DEFAULT_LIMIT, SORTING_ORDERS } from 'Constants';
 
 import data from 'features/Authors/data.json';
 
-import './styles.scss';
+import { compareStrings, compareNumbers } from 'helpers/index';
 
-const sortingOrders = {
-  asc: 'asc',
-  desc: 'desc',
-};
+import './styles.scss';
 
 const Authors = () => {
   const [topThree, setTopThree] = useState([]);
@@ -24,8 +21,8 @@ const Authors = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   const [sortOrders, setSortOrders] = useState({
-    name: sortingOrders.asc,
-    pageviews: sortingOrders.asc,
+    name: SORTING_ORDERS.asc,
+    pageviews: SORTING_ORDERS.asc,
   });
 
   const {
@@ -34,42 +31,42 @@ const Authors = () => {
     currentItems: searchCurrentItems,
     handleChange: searchHandleChange,
     reset,
-  } = usePagination(DEFAULT_OFFSET, DEFAULT_LIMIT, searchResults);
+  } = usePagination(
+    DEFAULT_OFFSET,
+    DEFAULT_LIMIT,
+    searchResults,
+    searchResults
+  );
 
-  const compareStrings = (a, b) => a.localeCompare(b);
-
-  const compareNumbers = (a, b) => a - b;
+  const page = useMemo(() => searchOffset / 10 + 1, [searchOffset]);
 
   const sort = (order, field) => {
-    const nextOrder =
-      order === sortingOrders.asc ? sortingOrders.desc : sortingOrders.asc;
-
     const sortedResults = searchResults.sort((a, b) => {
       const isNumber = typeof a[field] === 'number';
 
       if (isNumber) {
-        return order === sortingOrders.desc
+        return order === SORTING_ORDERS.desc
           ? compareNumbers(a[field], b[field])
           : compareNumbers(b[field], a[field]);
       } else {
-        return order === sortingOrders.desc
+        return order === SORTING_ORDERS.desc
           ? compareStrings(a[field], b[field])
           : compareStrings(b[field], a[field]);
       }
     });
-    // console.log('sortedResults', sortedResults);
 
-    setSearchResults(sortedResults);
-    setSortOrders({ ...sortOrders, field: nextOrder });
+    const absentAuthors = getAbsentAuthors(sortedResults);
+
+    setSearchResults([...topThree, ...absentAuthors]);
+    setSortOrders({ ...sortOrders, [field]: order });
   };
 
-  // console.log('search results', searchResults);
   const handleSearch = ({ target: { value } }) => {
     setValue(value);
     reset();
   };
 
-  const getAbsentInSearchResults = (results) => {
+  const getAbsentAuthors = (results) => {
     const topThreeIds = topThree.map(({ id }) => id);
 
     const absentAuthors = results.filter(({ id }) => {
@@ -82,19 +79,18 @@ const Authors = () => {
   useEffect(() => {
     // get all search results
     const searchResults = data.filter(({ name }) => {
-      console.log(name, value);
       return name.toLowerCase().includes(value.toLowerCase());
     });
 
     // get absent in search results from top 3
-    const absentAuthors = getAbsentInSearchResults(searchResults);
+    const absentAuthors = getAbsentAuthors(searchResults);
 
     setSearchResults([...topThree, ...absentAuthors]);
   }, [value]);
 
   const getTopThree = () => {
     const topThree = [...data]
-      .sort((a, b) => b.pageviews - a.pageviews)
+      .sort((a, b) => compareNumbers(b.pageviews, a.pageviews))
       .slice(0, 3);
 
     setTopThree(topThree);
@@ -104,12 +100,7 @@ const Authors = () => {
     getTopThree();
   }, []);
 
-  const getIsTopPlace = (id) => {
-    const isTopPlace = topThree.map(({ id }) => id).includes(id);
-    return isTopPlace;
-  };
-
-  const page = useMemo(() => searchOffset / 10 + 1, [searchOffset]);
+  const getIsTopPlace = (id) => topThree.map(({ id }) => id).includes(id);
 
   return (
     <div className="authors">
@@ -119,7 +110,7 @@ const Authors = () => {
           onChange={handleSearch}
         />
 
-        {/* <div className="sort-header--wrapper">
+        <div className="sort-header--wrapper">
           <div />
           <div />
           <SortHeader order={sortOrders.name} sort={sort} field="name">
@@ -133,7 +124,7 @@ const Authors = () => {
           >
             Page views
           </SortHeader>
-        </div> */}
+        </div>
 
         {searchCurrentItems.length &&
           searchCurrentItems.map((author, index) => (
