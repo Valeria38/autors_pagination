@@ -6,3 +6,6 @@
 
 * To open the project locally run
 ## yarn start
+
+* To run unit tests
+## yarn test
