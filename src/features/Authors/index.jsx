@@ -17,7 +17,7 @@ import './styles.scss';
 
 const Authors = () => {
   const [topThree, setTopThree] = useState([]);
-  const [value, setValue] = useState('');
+  const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
   const [sortOrders, setSortOrders] = useState({
@@ -62,7 +62,7 @@ const Authors = () => {
   };
 
   const handleSearch = ({ target: { value } }) => {
-    setValue(value);
+    setSearchValue(value);
     reset();
   };
 
@@ -79,14 +79,14 @@ const Authors = () => {
   useEffect(() => {
     // get all search results
     const searchResults = data.filter(({ name }) => {
-      return name.toLowerCase().includes(value.toLowerCase());
+      return name.toLowerCase().includes(searchValue.toLowerCase());
     });
 
     // get absent in search results from top 3
     const absentAuthors = getAbsentAuthors(searchResults);
 
     setSearchResults([...topThree, ...absentAuthors]);
-  }, [value]);
+  }, [searchValue]);
 
   const getTopThree = () => {
     const topThree = [...data]
@@ -106,6 +106,8 @@ const Authors = () => {
     <div className="authors">
       <div className="authors--list-wrapper">
         <SearchInput
+          name="search"
+          value={searchValue}
           placeholder="Поиск авторов по имени"
           onChange={handleSearch}
         />

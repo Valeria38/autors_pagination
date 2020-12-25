@@ -5,9 +5,9 @@ const usePagination = (defaultOffset, defaultLimit, items) => {
   const [offset, setOffset] = useState(defaultOffset);
   const [currentItems, setCurrentItems] = useState([]);
 
-  const handleChange = (offset, limit) => {
-    setOffset(offset);
-    setLimit(limit);
+  const handleChange = (newOffset, newLimit) => {
+    setOffset(newOffset);
+    setLimit(newLimit);
   };
 
   useEffect(() => {
